@@ -1,6 +1,9 @@
 # remve visual studio stuf
 **/out/
 **/.vs
+**/build
+**/builds
+**/_builds
 
 # Prerequisites
 *.d

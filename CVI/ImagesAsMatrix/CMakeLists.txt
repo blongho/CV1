@@ -3,7 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.0)
 
-project ("COMPUTER VISION I")
+project ("CVI")
 find_package(OpenCV REQUIRED)
 INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS} )
 # Include sub-projects.
