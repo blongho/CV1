@@ -13,35 +13,43 @@ int main()
 
     // An 8 bit per color image, unsigned integers (0 - 255) with three channels
     // The pixels can take any value from 0 to 255. We set all the pixels to 0(black)
-    imshow("Empty Image before ",emptyMatrix);
+    //imshow("Empty Image before ",emptyMatrix);
 
     // Change the image pixels from black to white
     emptyMatrix.setTo(Scalar(255, 255, 255));
 
-    imshow("Empty Image after set to white ", emptyMatrix);
+    //imshow("Empty Image after set to white ", emptyMatrix);
 
 
     // Create an empty matrix of the same size as the original image
     
     Mat emptyFromAnother = Mat(emptyMatrix.size(), emptyMatrix.type(), Scalar(100, 100, 100));
 
-    imshow("Copied from original", emptyFromAnother);
+    //imshow("Copied from original", emptyFromAnother);
 
 
-    // Cropping an image
+    //2. Cropping an image
     // We need to know where to crop i.e. the range of the rows and columns of interest
     
-    const std::string path = "D:\\images\\Grab\\image (186).png";
+    const std::string path = "../../images/apple.jpg";
    
         Mat hand = imread(path, -1);
         cout << "Size of hand " << hand.size() << endl;
-        imshow("See me", hand);
+        imshow("Original hand", hand);
 
         // Crop using some random values
         // x coordinates = 170 to 320
         // y coordinates = 40 to 200
         Mat croppedHand = hand(Range(40, 200), Range(170, 320));
-        imshow("Cropped hand", croppedHand);
+        //imshow("Cropped hand", croppedHand);
+
+    // 3. Copying a region of an image to another 
+    // Worth noting is the fact that the size of the rectangle that you cropped
+    // is same as the area to paste it
+    
+        // Create a copy of the original image, hand
+        Mat copiedHand = hand.clone();
+        imshow("Copied hand ", copiedHand);
     }
     catch (const std::exception&e)
     {
