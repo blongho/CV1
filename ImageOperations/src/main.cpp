@@ -31,25 +31,39 @@ int main()
     //2. Cropping an image
     // We need to know where to crop i.e. the range of the rows and columns of interest
     
-    const std::string path = "../../images/apple.jpg";
+    const std::string path = "../../images/messi5.jpg";
    
-        Mat hand = imread(path, -1);
-        cout << "Size of hand " << hand.size() << endl;
-        imshow("Original hand", hand);
+        Mat original = imread(path, -1);
+        cout << "Size of apple " << original.size() << endl; // [512 x 512]
+        imshow("Original apple", original);
 
         // Crop using some random values
         // x coordinates = 170 to 320
         // y coordinates = 40 to 200
-        Mat croppedHand = hand(Range(40, 200), Range(170, 320));
-        //imshow("Cropped hand", croppedHand);
+        Mat croppedApple = original(Range(40, 200), Range(170, 320));
+        //imshow("Cropped Apple", croppedApple);
 
     // 3. Copying a region of an image to another 
     // Worth noting is the fact that the size of the rectangle that you cropped
     // is same as the area to paste it
     
         // Create a copy of the original image, hand
-        Mat copiedHand = hand.clone();
-        imshow("Copied hand ", copiedHand);
+        Mat copiedImage = original.clone();
+      //  imshow("Copied apple ", copiedImage);
+
+    // Get roi
+        Mat copyRoi = copiedImage(Range(40, 200), Range(180, 320));
+
+        // Find height and width of the ROI
+        int roiHeight = copyRoi.size().height;
+        int roiWidth = copyRoi.size().width;
+
+        // Copy to left of Face
+        copyRoi.copyTo(copiedImage(Range(40, 40 + roiHeight), Range(10, 10 + roiWidth)));
+        // Copy to right of Face
+        copyRoi.copyTo(copiedImage(Range(40, 40 + roiHeight), Range(330, 330 + roiWidth)));
+
+        imshow("Output image ", copiedImage);
     }
     catch (const std::exception&e)
     {
