@@ -13,7 +13,7 @@ message(STATUS "OpenCV include dirs: ${OpenCV_INCLUDE_DIRS}")
 
 include_directories(headers)
 
-file(GLOB SOURCE_FILES "src/*.cpp" "src/*.cc" "src/*.c")
+file(GLOB SOURCE_FILES "src/*.cpp")
 
 
 add_executable(${EXECUTABLE} ${SOURCE_FILES})

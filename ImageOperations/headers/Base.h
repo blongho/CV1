@@ -10,5 +10,9 @@
 #include <iostream>
 #include <string>
 using namespace cv;
+using std::cout;
+using std::endl;
+using std::cerr; 
+
 #endif
 // TODO: Reference additional headers your program requires here.
