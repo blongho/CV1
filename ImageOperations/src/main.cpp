@@ -125,9 +125,43 @@ int main()
 		resize(original, scaledDown, Size(), scaleDownFactor, scaleDownFactor, INTER_LINEAR);
 		resize(original, scaledUp, Size(), scalupX, scalupY, INTER_LINEAR);
 
-		imshow("new up", scaledUp);
-		imshow("new down", scaledDown);
+		//imshow("new up", scaledUp);
+		//imshow("new down", scaledDown);
 
+		/*
+		
+			If we want to focus on red pixels, the simplest logic that does the trick is:
+
+			The red channel should have high intensity ( keep the range of pixel values from 150 to 255 )
+			The other 2 channels should have low intensity ( keep the range of pixel values in Blue and Green channels between 0 to 100)
+			There is a nice OpenCV function which can do exactly this. We will use the opencv function inRange
+			
+			Function Syntax
+			It finds the pixels which lie in between the specified range. 
+			It produces a binary output image in which the white pixels corresspond to those pixels in the input image which fall in the specified range. The pixel values which fall outside the specified range are black (0)
+			
+			void cv::inRange    (   InputArray  src,
+			InputArray  lowerb,
+			InputArray  upperb,
+			OutputArray     dst
+			)
+			Parameters
+			
+			src - first input array.
+			lowerb - inclusive lower boundary array or a scalar.
+			upperb - inclusive upper boundary array or a scalar.
+			dst - output array of the same size as src and CV_8U type.
+			It produces a binary image ( pixels are either black or white ).
+		*/
+
+		Mat mask;
+		// Select the pixels in the range
+		// Blue: 0-100 pixels
+		// Green: 0-100 pixels
+		// Red: 150->250 pixels
+		inRange(original, Scalar(0, 0, 150), Scalar(100, 100, 255), mask);
+
+		imshow("Mask", mask);
 	}
 	catch (const std::exception & e)
 	{
