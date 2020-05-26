@@ -2,9 +2,13 @@
 // or project specific include files.
 
 
-#pragma once
+#ifndef BASE_H
+#define BASE_H
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include <iostream>
+#include <string>
+using namespace cv;
+#endif
 // TODO: Reference additional headers your program requires here.
