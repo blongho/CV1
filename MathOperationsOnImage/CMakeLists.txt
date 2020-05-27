@@ -30,7 +30,6 @@ ADD_CUSTOM_TARGET(real_with_debug
 find_package(OpenCV REQUIRED)
 
 include_directories({OpenCV_INCLUDE_DIRS})
-
 message(STATUS "OpenCV include dirs: ${OpenCV_INCLUDE_DIRS}")
 
 include_directories(headers)

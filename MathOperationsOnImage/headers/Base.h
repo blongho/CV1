@@ -13,6 +13,6 @@ using namespace cv;
 using std::cout;
 using std::endl;
 using std::cerr; 
-
+void imageInfo(const Mat& image);
 #endif
 // TODO: Reference additional headers your program requires here.
