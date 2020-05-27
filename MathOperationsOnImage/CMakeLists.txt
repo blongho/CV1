@@ -22,7 +22,7 @@ ADD_CUSTOM_TARGET(release
   COMMENT "Creating the executable in the release mode.")
 
   
-ADD_CUSTOM_TARGET(RelWithDebInfo
+ADD_CUSTOM_TARGET(real_with_debug
   COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=RelWithDebInfo ${CMAKE_SOURCE_DIR}
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target all
   COMMENT "Creating the executable in the release with debug info mode.")
