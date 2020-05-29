@@ -9,12 +9,17 @@
 #include <opencv2/imgproc.hpp>
 #include <iostream>
 #include <string>
-#include <sstream>
+#include <utility>
 using namespace cv;
 using std::cout;
 using std::endl;
 using std::cerr; 
 
+template <class Type, class... Types>
+void printOn(const Type& arg, const Types&... args) {
+    std::cout << arg;
+    ((std::cout << " " << args), ..., (std::cout << endl));
+}
 #define type2str(int) cv::typeToString(int)
 void imageInfo(const Mat& image);
 
