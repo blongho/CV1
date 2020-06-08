@@ -1,6 +1,6 @@
 #include "Base.h"
 #include "ContrastAndBrightness.h"
-int main()
+int main(int argc, char** argv)
 {
 	
 	try
@@ -98,7 +98,11 @@ int main()
 		//c.convertTo(b_uint8, CV_8UC1);
 		//cout << b_uint8;
 		
-		hello();
+
+		Mat image = imread(path);
+		transform(image);
+
+		gammaCorrection(image, -10.0f);
 	}
 
 	catch (const std::exception & e)
