@@ -8,13 +8,13 @@ int main(int argc, char** argv)
 
 		Mat image = imread(imagePath);
 
-		imshow("A boy", image);
+		//imshow("A boy", image);
 
 		Mat imageLine = image.clone();
 
 		line(imageLine, Point(200, 80), Point(280, 80), Scalar(0, 255, 0), 3, LINE_AA);
 		
-		imshow("Boy with score", imageLine);
+		//imshow("Boy with score", imageLine);
 	
 		// Drawing a circle in an image
 		
@@ -23,15 +23,15 @@ int main(int argc, char** argv)
 
 		circle(imageCircle, Point{ 250, 125 }, 100, Scalar{ 255, 0, 0 }, 5, LINE_AA);
 
-		imshow("Boy with circle", imageCircle);
+		//imshow("Boy with circle", imageCircle);
 
 		Mat filledHead;
 		image.copyTo(filledHead);
 
 		// Specifying the thickness to -1 fills the circle
-		circle(filledHead, Point{ 250, 125 }, 100, Scalar{ 0, 0, 255 }, -1, LINE_AA);
+		//circle(filledHead, Point{ 250, 125 }, 100, Scalar{ 0, 0, 255 }, -1, LINE_AA);
 
-		imshow("Boy with filled circle", filledHead);
+		//imshow("Boy with filled circle", filledHead);
 
 		// Drawing an ellipse
 		
@@ -42,7 +42,17 @@ int main(int argc, char** argv)
 
 		ellipse(imageEllipse, Point(250, 125), Point(100, 50), 90, 0, 360, Scalar(0, 0, 255), 3, LINE_AA);
 
-		imshow("Image with ellipse", imageEllipse);
+		// draw half ellipse
+		ellipse(imageEllipse, Point(250, 125), Point(100, 50), 0, 180, 360, Scalar(0, 255, 0), -3, LINE_AA);
+		//imshow("Image with ellipse", imageEllipse);
+
+		// Drawing a rectangle
+		
+		Mat imageRect;
+		image.copyTo(imageRect);
+		rectangle(imageRect, Point(170, 50), Point(300, 200), Scalar(255, 0, 255), 5, LINE_AA);
+
+		imshow("image with rectangle", imageRect);
 	}
 
 	catch (const std::exception & e)
