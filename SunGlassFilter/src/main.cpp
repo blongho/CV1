@@ -46,9 +46,9 @@ int main(int argc, char** argv)
 
 		imshow("original face", face);
 
-		imshow("Sunglass color channels", glassBGR);
+		//imshow("Sunglass color channels", glassBGR);
 
-		imshow("Sunglass alpha channels", glassMask1);
+		//imshow("Sunglass alpha channels", glassMask1);
 
 		// Replace eye region with glasses
 		// By trial an error, the eye region is at (130, 130)
@@ -66,7 +66,66 @@ int main(int argc, char** argv)
 		glassBGR.copyTo(roiFace);
 
 		// display image
-		imshow("Face with glasses", faceWithGlassesNaive);
+		//imshow("Face with glasses", faceWithGlassesNaive);
+
+		/*
+
+		Using Arithmetic Operationsand Alpha Mask
+			In order to put the sunglass on top of the eye region, we need to follow these steps :
+
+			1 Create a binary mask with 3 - channels using the single channel mask.
+			2 Extract the eye region from the face image
+			3 Multiply the Mask with the sunglass to get the masked sunglass
+			4 Multiply the negative of Mask with the eye region to create a hole in the eye region for the sunglass to be placed.
+			5 Add the masked sun
+			6 Replace the eye region in the original image with that of the output we got in the previous step. This is the final output
+		*/
+
+		// Make the dimensions of the mask same as the input image.
+	// Since Face Image is a 3-channel image, we create a 3 channel image for the mask
+		Mat glassMask;
+		Mat glassMaskChannels[] = { glassMask1,glassMask1,glassMask1 };
+		merge(glassMaskChannels, 3, glassMask);
+
+		// Make a copy
+		Mat faceWithGlassesArithmetic = face.clone();
+
+		// Get the eye region from the face image
+		Mat eyeROI = faceWithGlassesArithmetic(Range(topLeftRow, bottomRightRow), Range(topLeftCol, bottomRightCol));
+
+		Mat eyeROIChannels[3];
+		split(eyeROI, eyeROIChannels);
+		Mat maskedEyeChannels[3];
+		Mat maskedEye;
+
+		for (int i = 0; i < 3; i++)
+		{
+			// Use the mask to create the masked eye region
+			multiply(eyeROIChannels[i], (1 - glassMaskChannels[i]), maskedEyeChannels[i]);
+		}
+
+		merge(maskedEyeChannels, 3, maskedEye);
+
+		Mat maskedGlass;
+		// Use the mask to create the masked sunglass region
+		multiply(glassBGR, glassMask, maskedGlass);
+
+		Mat eyeRoiFinal;
+		
+		// Combine the Sunglass in the Eye Region to get the augmented image
+		add(maskedEye, maskedGlass, eyeRoiFinal);
+
+		//imshow("Masked Eye region", maskedEye);
+		//imshow("Masked Sun glass region", maskedGlass);
+		//imshow("Augmented Eye and Sunglass", eyeRoiFinal);
+
+		const float alpha = 1;
+		const int beta = -255;
+		// Replace the eye ROI with the output from the previous section
+		eyeRoiFinal.copyTo(eyeROI);
+
+		
+		imshow("Face with sunglasses", faceWithGlassesArithmetic);
 	}
 
 	catch (const std::exception & e)
