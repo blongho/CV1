@@ -19,32 +19,32 @@ string trackbarType = "Type: \n 0: Scale Up \n 1: Scale Down";
 
 void scaleImage(int, void*);
 
-int main(){
-// load an image
-im = imread(IMAGE_PATH +"truth.png");
+int main() {
+	// load an image
+	im = imread(IMAGE_PATH + "truth.png");
 
-// Create a window to display results
-namedWindow(windowName, WINDOW_AUTOSIZE);
+	// Create a window to display results
+	namedWindow(windowName, WINDOW_AUTOSIZE);
 
-createTrackbar(trackbarValue, windowName, &scaleFactor, maxScaleUp, scaleImage);
-createTrackbar(trackbarType, windowName, &scaleType, maxType, scaleImage);
+	createTrackbar(trackbarValue, windowName, &scaleFactor, maxScaleUp, scaleImage);
+	createTrackbar(trackbarType, windowName, &scaleType, maxType, scaleImage);
 
-scaleImage(25,0);
+	scaleImage(25, 0);
 
-while (true){
-	int c;
-	c = waitKey(20);
-	if (static_cast<char>(c) == 27)
-		break;
-}
+	while (true) {
+		int c;
+		c = waitKey(20);
+		if (static_cast<char>(c) == 27)
+			break;
+	}
 
-return 0;
+	return 0;
 }
 
 // Callback functions
-void scaleImage(int, void*){
-	double scaleFactorDouble = 1 + scaleFactor/100.0;
-	if (scaleFactorDouble == 0){
+void scaleImage(int, void*) {
+	double scaleFactorDouble = 1 + scaleFactor / 100.0;
+	if (scaleFactorDouble == 0) {
 		scaleFactorDouble = 1;
 	}
 	Mat scaledImage;
