@@ -18,8 +18,8 @@ const string trackbarValue = "Scale";
 const string trackbarType = "Type: \n 0: Scale Up \n 1: Scale Down";
 
 void scaleImage(int, void*);
-
 int main() {
+
 	// load an image
 	im = imread(IMAGE_PATH + "truth.png");
 
@@ -28,7 +28,6 @@ int main() {
 
 	createTrackbar(trackbarValue, windowName, &scaleFactor, maxScaleUp, scaleImage);
 	createTrackbar(trackbarType, windowName, &scaleType, maxType, scaleImage);
-
 	scaleImage(25, 0);
 
 	while (true) {
@@ -47,8 +46,10 @@ void scaleImage(int, void*) {
 	if (scaleFactorDouble == 0) {
 		scaleFactorDouble = 1;
 	}
+	if (scaleType == 1) {
+		scaleFactorDouble = 1 - (scaleFactor / 100.0);
+	}
 	Mat scaledImage;
 	resize(im, scaledImage, Size(), scaleFactorDouble, scaleFactorDouble, INTER_LINEAR);
 	imshow(windowName, scaledImage);
 }
-
