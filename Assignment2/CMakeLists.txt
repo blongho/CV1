@@ -10,11 +10,6 @@ find_package(OpenCV REQUIRED)
 include_directories({OpenCV_INCLUDE_DIRS})
 message(STATUS "OpenCV include dirs: ${OpenCV_INCLUDE_DIRS}")
 
-include_directories(headers)
-
-file(GLOB SOURCE_FILES "src/*.cpp")
-
-
 add_executable(${EXECUTABLE} ${SOURCE_FILES} "submission.cpp")
 message(STATUS "project source files: ${SOURCE_FILES}")
 message(STATUS "opencv libs: ${OpenCV_LIBS}")
