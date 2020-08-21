@@ -34,6 +34,7 @@ int main(void)
 			// Identify if 'z' or 'Z' is pressed or not
 			if (k == 90 || k == 122)
 				putText(frame, "Z is pressed", Point(100, 180), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 255, 0), 3);
+			
 			imshow("Image", frame);
 			// Waitkey is increased so that the display is shown
 			k = waitKey(10000) & 0xFF;
