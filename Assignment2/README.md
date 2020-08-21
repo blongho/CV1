@@ -2,4 +2,4 @@
 
 Using open CV for image annotation
  
-see [instructions](./instructions) for task description
+see [instructions](./instructions.md) for task description
