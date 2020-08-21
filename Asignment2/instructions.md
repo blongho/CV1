@@ -20,3 +20,7 @@ Please submit the following files in zip format:
 4. Any other necessary file.
 
 While grading, we will just unzip your submission and run your code. So make sure that you have submitted all the files required.
+
+
+## Expected output
+[![Crop image and save same](images/expected-output.png)](https://youtu.be/66w4VdklWaA)
