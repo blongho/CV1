@@ -1,1 +1,1 @@
-std::string DATA_PATH = "./data/";
+std::string DATA_PATH = "../data/";
